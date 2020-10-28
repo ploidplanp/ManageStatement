@@ -1,47 +1,23 @@
-import React from "react";
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  Platform,
-  FlatList,
-} from "react-native";
-import { CATEGORIES, MEALS } from "../data/dummy-data";
-import MealItem from "../components/MealItem";
-import MealList from "../components/MealList"
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
+import { useSelector } from 'react-redux'
+
+// import from my file
+import { CATEGORIES } from '../data/dummy-data'
+import MEALS from '../store/reducers/mealsReducer'
+import MealList from '../components/MealList'
 
 const CategoryMealsScreen = (props) => {
-  const renderMealItem = (itemData) => {
-    // return (
-    //   <MealItem
-    //     title={itemData.item.title}
-    //     duration={itemData.item.duration}
-    //     complexity={itemData.item.complexity}
-    //     affordability={itemData.item.affordability}
-    //     image={itemData.item.imageUrl}
-    //     onSelectMeal={() => {
-    //       props.navigation.navigate("MealDetail", {
-    //         id: itemData.item.id,
-    //       });
-    //     }}
-    //   />
-    // );
-  };
 
-  const catId = props.navigation.getParam("id");
+  const catId = props.navigation.getParam('id');
 
-  const displayedMeals = MEALS.filter(
+  const availableMeals = useSelector(state => state.meals.filteredMeals)
+  const displayedMeals = availableMeals.filter(
     (meal) => meal.categoryIds.indexOf(catId) >= 0
   );
 
   return (
     <View style={styles.screen}>
-      {/* <FlatList
-        style={{ width: "100%" }}
-        data={displayedMeals}
-        renderItem={renderMealItem}
-      /> */}
       <MealList
         listData={displayedMeals}
         navigation={props.navigation}
@@ -51,10 +27,9 @@ const CategoryMealsScreen = (props) => {
 };
 
 CategoryMealsScreen.navigationOptions = (navigationData) => {
-  const catId = navigationData.navigation.getParam("id");
+  const catId = navigationData.navigation.getParam('id')
 
-  const selectedCategory = CATEGORIES.find((cat) => cat.id === catId);
-  console.log("selectedCategory: ", selectedCategory);
+  const selectedCategory = CATEGORIES.find((cat) => cat.id === catId)
 
   return {
     headerTitle: selectedCategory.title,
@@ -64,8 +39,8 @@ CategoryMealsScreen.navigationOptions = (navigationData) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

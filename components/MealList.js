@@ -5,7 +5,6 @@ import MealItem from "../components/MealItem";
 const MealList = (props) => {
   const renderMealItem = (itemData) => {
     return (
-      //เขียนโค้ดเพิ่ม
       <MealItem
         title={itemData.item.title}
         duration={itemData.item.duration}
@@ -15,6 +14,7 @@ const MealList = (props) => {
         onSelectMeal={() => {
           props.navigation.navigate("MealDetail", {
             id: itemData.item.id,
+            mealTitle: itemData.item.title
           });
         }}
       />

@@ -87,7 +87,7 @@ const MainNagivator = createDrawerNavigator({
     Filters: {
         screen: FiltersNavigator,
         navigationOptions: {
-            drawerLabel: "Meals",
+            drawerLabel: "Filter",
             drawerIcon: () => {
                 return (<MaterialCommunityIcons name="filter" size={24} color="#14274e" />);
             }
